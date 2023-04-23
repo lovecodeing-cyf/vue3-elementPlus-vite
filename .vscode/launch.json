@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "调试TS代码",
+            // 调试时加载ts-node（在调试时可以运行ts代码）
+            "runtimeArgs": ["-r", "ts-node/register"],
+            // 表示要调试的文件
+            "args": ["${workspaceFolder}/a.ts"]
+        }
+    ]
+}
