@@ -36,7 +36,7 @@
             <el-row class="searchBtn">
                 <el-col align="center">
                     <el-button type="primary" icon="Search" size="mini" @click="searchTable"></el-button>
-                    <el-button  size="mini" @click="resetQuery">重置</el-button>
+                    <el-button size="mini" @click="resetQuery">重置</el-button>
                 </el-col>
             </el-row>
         </el-form>
@@ -51,62 +51,58 @@
             <el-table-column prop="phone" label="电话" width="180" />
             <el-table-column prop="address" label="住址" />
             <el-table-column fixed="right" label="操作" width="150">
-            <template #default>
-                <el-button type="primary" icon="Edit" circle size="mini" @click="updateUser"></el-button>
-                <el-button type="danger" icon="Delete" circle size="mini" @click="removeUser"></el-button>
-                <el-button type="info" icon="Message" circle size="mini" @click="userDetail"></el-button>
-            </template>
+                <template #default>
+                    <el-button type="primary" icon="Edit" circle size="mini" @click="updateUser"></el-button>
+                    <el-button type="danger" icon="Delete" circle size="mini" @click="removeUser"></el-button>
+                    <el-button type="info" icon="Message" circle size="mini" @click="userDetail"></el-button>
+                </template>
             </el-table-column>
         </el-table>
         <el-row>
             <el-col align="right">
-                <el-pagination
-                :currentPage="currentPage"
-                :page-size="pageSize"
-                :page-sizes="pageSeizes"
-                :small="true"
-                :background="true"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400"
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                >
+                <el-pagination :currentPage="currentPage" :page-size="pageSize" :page-sizes="pageSeizes" :small="true"
+                    :background="true" layout="total, sizes, prev, pager, next, jumper" :total="400"
+                    @size-change="handleSizeChange" @current-change="handleCurrentChange">
                 </el-pagination>
             </el-col>
         </el-row>
+        <addUser :visible="dialogVisible"></addUser>
     </el-card>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import {
+    ref
+} from 'vue';
+import addUser from './add-user';
 export default {
     name: 'user-manage',
-    setup () { 
-        const tableData:TableData = [
-            {
-                phone: '13355667788',
-                name: 'Tom',
-                sex: '女',
-                address: 'No. 189, Grove St, Los Angeles',
-            },
-            {
-                phone: '13355667799',
-                name: 'Tom',
-                sex: '男',
-                address: 'No. 189, Grove St, Los Angeles',
-            },
-            {
-                phone: '13355668899',
-                name: 'Tom',
-                sex: '女',
-                address: 'No. 189, Grove St, Los Angeles',
-            },
-            {
-                phone: '13355666699',
-                name: 'Tom',
-                sex: '男',
-                address: 'No. 189, Grove St, Los Angeles',
-            }
+    components: {},
+    setup() {
+        const tableData: TableData = [{
+            phone: '13355667788',
+            name: 'Tom',
+            sex: '女',
+            address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+            phone: '13355667799',
+            name: 'Tom',
+            sex: '男',
+            address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+            phone: '13355668899',
+            name: 'Tom',
+            sex: '女',
+            address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+            phone: '13355666699',
+            name: 'Tom',
+            sex: '男',
+            address: 'No. 189, Grove St, Los Angeles',
+        }
         ];
         type TableData = {
             phone: string;
@@ -114,7 +110,7 @@ export default {
             sex: String,
             address: string;
         }[];
-        const searchData:SearchData = {
+        const searchData: SearchData = {
             name: '',
             sex: '',
             address: '',
@@ -128,7 +124,8 @@ export default {
         };
         let currentPage = ref<Number>(1);
         let pageSize = ref<Number>(15);
-        const pageSeizes:number[] = [15, 50, 100, 500];
+        const pageSeizes: number[] = [15, 50, 100, 500];
+        let dialogVisible = ref<Boolean>(false);
         // 表格查询
         const searchTable = () => {
             console.log('表格查询');
@@ -137,8 +134,9 @@ export default {
         const resetQuery = () => {
             console.log('重置查询');
         };
+        // 新增用户
         const addUser = () => {
-            console.log('addUser');
+            dialogVisible.value = true;
         }
         // 编辑用户
         const updateUser = (row: any) => {
@@ -157,16 +155,31 @@ export default {
         const handleCurrentChange = (val: number) => {
             console.log(`current page: ${val}`);
         }
-        return { tableData, searchData, currentPage, pageSize, pageSeizes, searchTable, resetQuery, addUser, updateUser, removeUser, userDetail, handleSizeChange, handleCurrentChange }
+        return {
+            tableData,
+            searchData,
+            currentPage,
+            pageSize,
+            pageSeizes,
+            searchTable,
+            resetQuery,
+            addUser,
+            updateUser,
+            removeUser,
+            userDetail,
+            handleSizeChange,
+            handleCurrentChange
+        }
     }
 }
 </script>
 
 <style scoped>
-.demo-pagination-block + .demo-pagination-block {
-  margin-top: 10px;
+.demo-pagination-block+.demo-pagination-block {
+    margin-top: 10px;
 }
+
 .demo-pagination-block .demonstration {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 </style>

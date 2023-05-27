@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
 import store, { key } from './store';
+import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import './assets/css/index.css'
@@ -62,11 +63,12 @@ const app = createApp(App);
 // 全局挂载axios
 app.config.globalProperties.$axios = axios;
 // 图标全局注册
-for (const name in ElIcons){
-	app.component(name,(ElIcons as any)[name])
+for (const name in ElIcons) {
+  app.component(name, (ElIcons as any)[name])
 }
 
 app.use(ElementPlus);
-app.use(store, key)
+app.use(store, key);
+app.use(createPinia())
 app.use(router);
 app.mount('#app')

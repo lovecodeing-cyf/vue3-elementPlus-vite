@@ -1,30 +1,13 @@
 <template>
-  <el-form
-    ref="loginFormRef"
-    :model="loginUser"
-    :rules="rules"
-    label-width="120px"
-    class="loginForm sign-in-form"
-  >
+  <el-form ref="loginFormRef" :model="loginUser" :rules="rules" label-width="120px" class="loginForm sign-in-form">
     <el-form-item label="邮箱" prop="email">
-      <el-input
-        v-model="loginUser.email"
-        placeholder="请输入邮箱"
-        autocomplete="false"
-      ></el-input>
+      <el-input v-model="loginUser.email" placeholder="请输入邮箱" autocomplete="false"></el-input>
     </el-form-item>
     <el-form-item label="密码" prop="password">
-      <el-input
-        v-model="loginUser.password"
-        placeholder="请输入密码"
-        type="password"
-        autocomplete="false"
-      ></el-input>
+      <el-input v-model="loginUser.password" placeholder="请输入密码" type="password" autocomplete="false"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" class="submit-btn" @click="handleLogin"
-        >登录</el-button
-      >
+      <el-button type="primary" class="submit-btn" @click="handleLogin">登录</el-button>
     </el-form-item>
     <!-- 找回密码 -->
     <div class="tiparea">
@@ -105,6 +88,7 @@ export default {
   font-size: 12px;
   color: #333;
 }
+
 .tiparea p a {
   color: #409eff;
 }

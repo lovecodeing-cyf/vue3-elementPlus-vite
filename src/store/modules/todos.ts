@@ -1,6 +1,6 @@
 import { Module } from "vuex"
 import { State } from "..";
-import http from "../../api/request";
+import service from "../../api/request";
 import { Todo } from '../../todos';
 
 const initialState = {
@@ -22,7 +22,7 @@ export default {
     },
     actions: {
         initTodo({ commit }) {
-            http.get<Todo>('http://jsonplaceholder.typicode.com/todos/1')
+            service.get<Todo>('http://jsonplaceholder.typicode.com/todos/1')
                 .then(resp => {
                     commit('addTodo', [resp.data]);
                 })
